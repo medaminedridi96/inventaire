@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -42,7 +45,25 @@ public class ComptageActivity extends AppCompatActivity {
         TextView textView=(TextView) findViewById(R.id.txtDn);
 
         textView.setText(text);
+
+        Intent mIntent1=getIntent();
+        mIntent1.getParcelableExtra("DATA");
+
+        Button btn1 = (Button) findViewById(R.id.btn1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent mIntent1 = new Intent(ComptageActivity.this, ProduitActivity.class);
+
+                startActivity(mIntent1);
+
+            }
+        });
+
     }
+
 
 
     @Override

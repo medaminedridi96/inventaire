@@ -33,6 +33,7 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -45,6 +46,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String EXTRA_TEXT="com.dridimedamine.inventaire.EXTRA_TEXT";
+
     DepotService depotService;
     List<Depot> list = new ArrayList<Depot>();
     Spinner spinner;
@@ -56,17 +58,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Button btn;
-
         spinner = (Spinner) findViewById(R.id.spinnerD);
 
         depotService = APIUtils.getDepotService();
 
-
         getDepotList();
-
-
-
-
 
         /*
         Agent ag = new Agent (1,"amine","drid","gfhfgdhg",222222);
@@ -121,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
     private void displayUserData(Depot depot) {
         final String adresse = depot.getAdresse();
         String action = depot.getAction();
-        List<Produit> produit= depot.getProduit();
+        final List<Produit> produit= depot.getProduit();
 
 
         String DepotData = "adresse: " + adresse + "\nAction: " + action +produit  ;
@@ -134,6 +130,11 @@ public class HomeActivity extends AppCompatActivity {
                 Intent mIntent = new Intent(HomeActivity.this, ComptageActivity.class);
                 mIntent.putExtra(EXTRA_TEXT,adresse );
                 startActivity(mIntent);
+
+                Intent mIntent1 = new Intent(HomeActivity.this, ProduitActivity.class);
+                mIntent1.putExtra("DATA", (Serializable) produit);
+                startActivity(mIntent1);
+
             }
         });
 

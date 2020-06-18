@@ -68,11 +68,8 @@ public class Depot {
 
     @Override
     public String toString() {
-        return "Depot{" +
-                "id=" + id +
-                ", adresse='" + adresse + '\'' +
-                ", action='" + action + '\'' +
-
-                '}';
+        return "Depot numero" +
+                 id
+                 ;
     }
 }

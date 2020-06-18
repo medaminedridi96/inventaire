@@ -1,48 +1,42 @@
 package com.dridimedamine.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-
 
 import com.dridimedamine.entites.Depot;
 import com.dridimedamine.entites.Produit;
-import com.dridimedamine.inventaire.ComptageActivity;
 import com.dridimedamine.inventaire.R;
 
 import java.util.List;
 
-public class DepotAdapter extends ArrayAdapter<Depot> {
-
+public class ProduitAdapter extends ArrayAdapter<Produit> {
     private Context context;
-    private List<Depot> depot;
+    private List<Produit> produit;
 
-
-
-    public DepotAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Depot> objects) {
+    public ProduitAdapter(@NonNull Context context, int resource, @NonNull List<Produit> objects) {
         super(context, resource, objects);
         this.context=context;
-        this.depot=objects;
-
+        this.produit=objects;
     }
 
     @Override
     public View getView(final int pos, View convertView, ViewGroup parent){
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.depotlist,parent,false);
+        View rowView = inflater.inflate(R.layout.activity_produit,parent,false);
 
-        TextView nom=(TextView) rowView.findViewById(R.id.nomD);
 
-        nom.setText(""+depot.get(pos).getAdresse());
+        TextView nom=(TextView) rowView.findViewById(R.id.nomP);
+
+        nom.setText(""+produit.get(pos).getNom());
+
+        Log.v("list", "onResponse: "+produit);
 
 
 
@@ -52,7 +46,4 @@ public class DepotAdapter extends ArrayAdapter<Depot> {
 
 
     }
-
 }
-
-
