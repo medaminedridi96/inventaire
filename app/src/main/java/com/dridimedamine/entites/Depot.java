@@ -1,37 +1,35 @@
 package com.dridimedamine.entites;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Depot {
+public class Depot implements Serializable {
+
     @SerializedName("id")
-    @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("adresse")
-    @Expose
-    private String adresse;
+    private String address;
 
     @SerializedName("action")
-    @Expose
     private String action;
 
     @SerializedName("produits")
-
-    List<Produit> produit= new ArrayList<Produit>();
+    List<Produit> products = new ArrayList<Produit>();
 
 
     public Depot() {
+
     }
 
-    public Depot(Integer id, String adresse, String action, List<Produit> produit) {
+    public Depot(int id, String address, String action, List<Produit> products) {
         this.id = id;
-        this.adresse = adresse;
+        this.address = address;
         this.action = action;
-        this.produit = produit;
+        this.products = products;
     }
 
     public Integer getId() {
@@ -42,12 +40,12 @@ public class Depot {
         this.id = id;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAdress() {
+        return address;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAdress(String adress) {
+        this.address = adress;
     }
 
     public String getAction() {
@@ -58,18 +56,16 @@ public class Depot {
         this.action = action;
     }
 
-    public List<Produit> getProduit() {
-        return produit;
+    public List<Produit> getProducts() {
+        return products;
     }
 
-    public void setProduit(List<Produit> produit) {
-        this.produit = produit;
+    public void setProducts(List<Produit> products) {
+        this.products = products;
     }
 
     @Override
     public String toString() {
-        return "Depot numero" +
-                 id
-                 ;
+        return "Dépôt N° " + getId();
     }
 }

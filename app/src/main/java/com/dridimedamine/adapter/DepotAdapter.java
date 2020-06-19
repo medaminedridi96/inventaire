@@ -1,13 +1,10 @@
 package com.dridimedamine.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -15,8 +12,6 @@ import androidx.annotation.NonNull;
 
 
 import com.dridimedamine.entites.Depot;
-import com.dridimedamine.entites.Produit;
-import com.dridimedamine.inventaire.ComptageActivity;
 import com.dridimedamine.inventaire.R;
 
 import java.util.List;
@@ -42,7 +37,7 @@ public class DepotAdapter extends ArrayAdapter<Depot> {
 
         TextView nom=(TextView) rowView.findViewById(R.id.nomD);
 
-        nom.setText(""+depot.get(pos).getAdresse());
+        nom.setText(""+depot.get(pos).getAdress());
 
 
 

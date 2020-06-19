@@ -14,6 +14,7 @@ import com.dridimedamine.global.Constants;
 import com.dridimedamine.global.Utils;
 import com.dridimedamine.inventaire.HomeActivity;
 import com.dridimedamine.inventaire.R;
+import com.dridimedamine.manager.PreferenceManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity {
+
+    private PreferenceManager mSharedPreferences;
 
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -34,6 +37,8 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         initializeView();
+        initialize();
+
         simulate(); //TODO to remove
     }
 
@@ -47,12 +52,17 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void run() {
                             hideProgressBar();
-                            //handleSuccess(null);
+                            mSharedPreferences.put(Constants.SharedPreferencesKeys.USERNAME, usernameEditText.getText().toString());
+                            handleSuccess(null);
                         }
                     }, 1500);
                 }
             });
         }
+    }
+
+    private void initialize() {
+        mSharedPreferences = PreferenceManager.getInstance();
     }
 
     private void initializeView() {
@@ -96,6 +106,7 @@ public class LoginActivity extends BaseActivity {
                             case Constants.HttpResponses.CODE_OK:
                                 if (response.body() != null) {
                                     hideProgressBar();
+                                    mSharedPreferences.put(Constants.SharedPreferencesKeys.USERNAME, username);
                                     handleSuccess(response.body());
                                 } else {
                                     handleError();
@@ -130,9 +141,11 @@ public class LoginActivity extends BaseActivity {
 
     private void handleSuccess(Object body) {
         //TODO body is the response resulting from calling login api
+
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        intent.putExtra(Constants.IntentKeys.USERNAME, usernameEditText.getText().toString());
+        intent.putExtra(Constants.IntentKeys.USERNAME, "simulated value user");
         startActivity(intent);
+        finish();
     }
 
     private boolean isValidForm(String username, String password) {

@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import com.dridimedamine.inventaire.R;
 import com.dridimedamine.manager.PreferenceManager;
-import com.dridimedamine.ui.SimpleDialog;
+import com.dridimedamine.ui.view.SimpleDialog;
 
 public class BaseActivity extends AppCompatActivity {
 

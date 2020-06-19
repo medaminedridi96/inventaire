@@ -12,4 +12,7 @@
     <color name="edit_text_text_color">#5c5c5b</color>
     <color name="separator_color">#cecece</color>
 
+    <color name="home_username_text_color">#5c5c5b</color>
+    <color name="standard_text_color">#5c5c5b</color>
+
 </resources>

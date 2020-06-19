@@ -16,7 +16,7 @@
         android:textSize="24sp"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="@string/titre" />
+        android:text="@string/morning_label_text" />
 
     <ImageView
         android:id="@+id/logo"

@@ -1,42 +1,27 @@
 package com.dridimedamine.inventaire;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Task;
-import com.dridimedamine.adapter.AgentAdapter;
-import com.dridimedamine.adapter.DepotAdapter;
-import com.dridimedamine.entites.Agent;
+import com.dridimedamine.data.rest.ApiClient;
 import com.dridimedamine.entites.Depot;
 import com.dridimedamine.entites.Produit;
-import com.dridimedamine.remote.APIUtils;
-import com.dridimedamine.remote.AgentService;
+import com.dridimedamine.global.Constants;
+import com.dridimedamine.global.Utils;
 import com.dridimedamine.remote.DepotService;
-import com.google.gson.Gson;
+import com.dridimedamine.ui.activities.BaseActivity;
+import com.dridimedamine.ui.view.CustomSpinner;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,105 +29,172 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+
     public static final String EXTRA_TEXT = "com.dridimedamine.inventaire.EXTRA_TEXT";
 
-    DepotService depotService;
-    List<Depot> list = new ArrayList<Depot>();
-    Spinner spinner;
-    Button btn;
+    private TextView usernameTextView;
+    private CustomSpinner depositSpinner;
+    private Button validateButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Button btn;
-        spinner = (Spinner) findViewById(R.id.spinnerD);
 
-        depotService = APIUtils.getDepotService();
-
-        getDepotList();
-
-        /*
-        Agent ag = new Agent (1,"amine","drid","gfhfgdhg",222222);
-        Agent ag2 = new Agent (1,"hedoi","drid","gfhfgdhg",222222);
-
-        list.add(ag);
-        list.add(ag2);
-        listView.setAdapter(new AgentAdapter(MainActivity2.this,R.layout.agentslist, list));
-
-         */
-
+        initializeView();
+        initialize();
 
     }
 
-    public void getDepotList() {
-        Call<List<Depot>> call = depotService.getDepot();
-        call.enqueue(new Callback<List<Depot>>() {
-            @Override
-            public void onResponse(Call<List<Depot>> call, Response<List<Depot>> response) {
-                if (response.isSuccessful()) {
-                    list = response.body();
 
-                    Log.d("list", "onResponse: " + list);
-                    ArrayAdapter<Depot> adapter = new ArrayAdapter<Depot>(HomeActivity.this, android.R.layout.simple_spinner_item, list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Depot depot = (Depot) parent.getSelectedItem();
-                            displayUserData(depot);
+    private void initializeView() {
+        usernameTextView = findViewById(R.id.tv_username);
+        depositSpinner = findViewById(R.id.spinner_deposit);
+        depositSpinner.setOnItemSelectedListener(this);
 
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Depot>> call, Throwable t) {
-                Log.e("ERROR: ", t.getCause().getMessage());
-            }
-        });
-    }
-
-    public void getSelectedDepot(View v) {
-        Depot depot = (Depot) spinner.getSelectedItem();
-        displayUserData(depot);
-    }
-
-    private void displayUserData(Depot depot) {
-        final String adresse = depot.getAdresse();
-        String action = depot.getAction();
-        final List<Produit> produit = depot.getProduit();
-
-
-        String DepotData = "adresse: " + adresse + "\nAction: " + action + produit;
-        Toast.makeText(this, DepotData, Toast.LENGTH_LONG).show();
-
-        btn = (Button) findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+        validateButton = findViewById(R.id.btn_validate);
+        validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(HomeActivity.this, ComptageActivity.class);
+                Depot selectedDepot = (Depot) depositSpinner.getSelectedItem();
+
+                navigateToPoductsActivity(selectedDepot);
+
+
+                /*Intent mIntent = new Intent(HomeActivity.this, ComptageActivity.class);
                 mIntent.putExtra(EXTRA_TEXT, adresse);
                 startActivity(mIntent);
 
                 Intent mIntent1 = new Intent(HomeActivity.this, ProduitActivity.class);
                 mIntent1.putExtra("DATA", (Serializable) produit);
-                startActivity(mIntent1);
+                startActivity(mIntent1);*/
 
             }
         });
+    }
+
+    private void navigateToPoductsActivity(Depot selectedDepot) {
+        Intent intent = new Intent(HomeActivity.this, ProduitActivity.class);
+        intent.putExtra(Constants.IntentKeys.SELECTED_DEPOT, selectedDepot);
+        startActivity(intent);
+    }
+
+    private void initialize() {
+
+        // TODO get data from login page
+        if (getIntent().hasExtra(Constants.IntentKeys.USERNAME) && getIntent().getStringExtra(Constants.IntentKeys.USERNAME) != null) {
+            String username = getIntent().getStringExtra(Constants.IntentKeys.USERNAME);
+            usernameTextView.setText(username);
+        }
+
+        if (Utils.isNetworkAvailable(this)) {
+            //getDepotList();
+            simulate(); // TODO remove simulation
+        } else {
+            showErrorDialog(getString(R.string.check_network));
+        }
+
 
     }
 
+    private void simulate() {
+        List<Produit> produits1 = new ArrayList<>();
+        produits1.add(new Produit(1, "product 1", 99));
+        produits1.add(new Produit(2, "product 2", 12));
+        produits1.add(new Produit(3, "product 3", 121));
 
+        List<Produit> produits2 = new ArrayList<>();
+        produits2.add(new Produit(4, "product 4", 0));
+        produits2.add(new Produit(5, "product 5", 50));
+        produits2.add(new Produit(6, "product 6", 612));
+
+        List<Produit> produits3 = new ArrayList<>();
+        produits3.add(new Produit(7, "product 7", 190));
+        produits3.add(new Produit(8, "product 8", 1211));
+        produits3.add(new Produit(9, "product 9", 871));
+
+
+        List<Depot> depots = new ArrayList<>();
+        depots.add(new Depot(1, "address 1", "action 1", produits1));
+        depots.add(new Depot(2, "address 2", "action 2", produits2));
+        depots.add(new Depot(3, "address 3", "action 3", produits3));
+
+        showProgressBar();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                populateDepositSpinner(depots);
+            }
+        }, 1500);
+
+    }
+
+    private void populateDepositSpinner(List<Depot> depots) {
+        hideProgressBar();
+        ArrayAdapter<Depot> depotArrayAdapter
+                = new ArrayAdapter<>(this, R.layout.item_deposit, depots);
+        depositSpinner.setAdapter(depotArrayAdapter);
+        depositSpinner.setSelection(0);
+
+    }
+
+    /**
+     * call getDepots api to return list of deposits
+     */
+    public void getDepotList() {
+
+        showProgressBar();
+        Call<List<Depot>> call = ApiClient.getClient().getDepot();
+
+        call.enqueue(new Callback<List<Depot>>() {
+            @Override
+            public void onResponse(Call<List<Depot>> call, Response<List<Depot>> response) {
+
+                switch (response.code()) {
+                    case Constants.HttpResponses.CODE_OK:
+                        if (response.body() != null) {
+                            hideProgressBar();
+                            populateDepositSpinner(response.body());
+                        } else {
+                            hideProgressBar();
+                            showErrorDialog(getString(R.string.error_server));
+                        }
+                        break;
+
+                    default:
+                        hideProgressBar();
+                        showErrorDialog(getString(R.string.error_server));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Depot>> call, Throwable t) {
+                hideProgressBar();
+                showErrorDialog(getString(R.string.error_server));
+            }
+        });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_deposit:
+                Depot selectedDepot = (Depot) parent.getSelectedItem();
+                //TODO check wherever to do on item selected
+                // Sheet is not so clear
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        Log.i("INFO", "Nothing Selected");
+    }
 }
 

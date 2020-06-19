@@ -3,34 +3,33 @@ package com.dridimedamine.entites;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Produit {
+import java.io.Serializable;
+
+public class Produit implements Serializable {
 
     @SerializedName("id")
-    @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("nom")
-    @Expose
     private String nom;
 
     @SerializedName("quantite")
-    @Expose
-    private Integer quantite;
+    private int quantite;
 
     public Produit() {
     }
 
-    public Produit(Integer id, String nom, Integer quantite) {
+    public Produit(int id, String nom, int quantite) {
         this.id = id;
         this.nom = nom;
         this.quantite = quantite;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,11 +41,11 @@ public class Produit {
         this.nom = nom;
     }
 
-    public Integer getQuantite() {
+    public int getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(Integer quantite) {
+    public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 

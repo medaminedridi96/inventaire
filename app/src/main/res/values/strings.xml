@@ -4,9 +4,9 @@
     <string name="username">Authentification</string>
     <string name="connect">SE CONNECTER</string>
     <string name="forget">Mot de passe oublié ?</string>
-    <string name="titre">Bonjour</string>
+    <string name="morning_label_text">Bonjour</string>
     <string name="titre2">Choisir un depot</string>
-    <string name="valider">VALIDER</string>
+    <string name="home_validate_button_text">VALIDER</string>
     <string name="titre3">Depot</string>
     <string name="ajoutC">Ajouter un nouveau comptage</string>
     <string name="refresh">refresh</string>
@@ -34,6 +34,7 @@
     <string name="error_server">Le serveur est indisponible pour le moment. Merci de ré-essayer d\'ici quelques instants.</string>
     <string name="check_network">Une connexion internet est nécessaire pour utiliser l\'application</string>
     <string name="error_username_or_password">"Veuillez entrer les coordonnées nécessaires ! "</string>
+    <string name="home_choose_hanger_title">Choisir un dépôt</string>
 
 
 </resources>

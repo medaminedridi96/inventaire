@@ -19,7 +19,7 @@ public interface ApiInterface {
     Call<List<Agent>> getAgents();
 
     @GET("depot")
-    Call<List<Agent>> getDepot();
+    Call<List<Depot>> getDepot();
 
     @FormUrlEncoded
     @POST(Constants.EndPoint.LOGIN_USER)

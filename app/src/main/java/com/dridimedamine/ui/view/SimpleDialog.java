@@ -1,4 +1,4 @@
-package com.dridimedamine.ui;
+package com.dridimedamine.ui.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;

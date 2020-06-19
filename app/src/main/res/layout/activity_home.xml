@@ -3,47 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".HomeActivity"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".HomeActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
 
-    <TextView
-        android:id="@+id/titre"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="@string/titre" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/default_large_padding">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/house"/>
+        <TextView
+            android:id="@+id/tv_morning_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_large_margin"
+            android:text="@string/morning_label_text"
+            android:textColor="@color/standard_text_color"
+            android:textSize="@dimen/morning_label_text_size" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="@string/titre2" />
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_morning_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_min_margin"
+            android:textColor="@color/home_username_text_color"
+            android:textSize="@dimen/home_username_text_size" />
 
-    <Spinner
-        android:id="@+id/spinnerD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></Spinner>>
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0091EA"
-        android:textColor="#ffffff"
-        android:layout_marginTop="30dp"
-        android:text="@string/valider"/>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tv_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@drawable/house" />
+
+        <TextView
+            android:id="@+id/choose_deposit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/home_choose_hanger_title"
+            android:textSize="@dimen/home_choose_hanger_text_size" />
+
+        <com.dridimedamine.ui.view.CustomSpinner
+            android:id="@+id/spinner_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_spinner_height"
+            android:layout_below="@id/choose_deposit_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/default_large_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_large_margin"
+            android:background="@drawable/bg_spinner"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="textNoSuggestions"
+            android:longClickable="false"
+            android:paddingStart="@dimen/dimen_12dp"
+            android:paddingEnd="@dimen/dimen_12dp"
+            android:textColor="@color/standard_text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/spinner_text_size" />
+
+        <Button
+            android:id="@+id/btn_validate"
+            style="@style/BlueButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/default_large_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_large_margin"
+            android:layout_marginBottom="@dimen/default_large_margin"
+            android:text="@string/home_validate_button_text" />
+
+    </RelativeLayout>
 </LinearLayout>
