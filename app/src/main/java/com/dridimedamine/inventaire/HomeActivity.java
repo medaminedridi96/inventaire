@@ -45,7 +45,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
-    public static final String EXTRA_TEXT="com.dridimedamine.inventaire.EXTRA_TEXT";
+    public static final String EXTRA_TEXT = "com.dridimedamine.inventaire.EXTRA_TEXT";
 
     DepotService depotService;
     List<Depot> list = new ArrayList<Depot>();
@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                     list = response.body();
 
                     Log.d("list", "onResponse: " + list);
-                    ArrayAdapter<Depot>adapter=new ArrayAdapter<Depot>(HomeActivity.this, android.R.layout.simple_spinner_item,list );
+                    ArrayAdapter<Depot> adapter = new ArrayAdapter<Depot>(HomeActivity.this, android.R.layout.simple_spinner_item, list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -96,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
                             displayUserData(depot);
 
                         }
+
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
                         }
@@ -109,26 +110,28 @@ public class HomeActivity extends AppCompatActivity {
                 Log.e("ERROR: ", t.getCause().getMessage());
             }
         });
-}
-    public void getSelectedDepot(View v  ) {
+    }
+
+    public void getSelectedDepot(View v) {
         Depot depot = (Depot) spinner.getSelectedItem();
         displayUserData(depot);
     }
+
     private void displayUserData(Depot depot) {
         final String adresse = depot.getAdresse();
         String action = depot.getAction();
-        final List<Produit> produit= depot.getProduit();
+        final List<Produit> produit = depot.getProduit();
 
 
-        String DepotData = "adresse: " + adresse + "\nAction: " + action +produit  ;
+        String DepotData = "adresse: " + adresse + "\nAction: " + action + produit;
         Toast.makeText(this, DepotData, Toast.LENGTH_LONG).show();
 
-        btn =(Button) findViewById(R.id.btn);
+        btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent(HomeActivity.this, ComptageActivity.class);
-                mIntent.putExtra(EXTRA_TEXT,adresse );
+                mIntent.putExtra(EXTRA_TEXT, adresse);
                 startActivity(mIntent);
 
                 Intent mIntent1 = new Intent(HomeActivity.this, ProduitActivity.class);

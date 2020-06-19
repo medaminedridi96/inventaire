@@ -25,6 +25,15 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_main2">MainActivity</string>
+    <string name="login_pseudo_hint">Authentifiant</string>
+    <string name="login_password_hint">Mot de passe</string>
+    <string name="login_sign_in_text">se connecter</string>
+    <string name="login_forget_password">Mot de passe oublié ?</string>
+    <string name="ok">Ok</string>
+
+    <string name="error_server">Le serveur est indisponible pour le moment. Merci de ré-essayer d\'ici quelques instants.</string>
+    <string name="check_network">Une connexion internet est nécessaire pour utiliser l\'application</string>
+    <string name="error_username_or_password">"Veuillez entrer les coordonnées nécessaires ! "</string>
 
 
 </resources>
