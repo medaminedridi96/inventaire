@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dridimedamine.entites.Depot;
 import com.dridimedamine.entites.Produit;
@@ -16,34 +17,28 @@ import com.dridimedamine.inventaire.R;
 
 import java.util.List;
 
-public class ProduitAdapter extends ArrayAdapter<Produit> {
-    private Context context;
-    private List<Produit> produit;
+public class ProduitAdapter extends RecyclerView.Adapter<ProduitHolder> {
 
-    public ProduitAdapter(@NonNull Context context, int resource, @NonNull List<Produit> objects) {
-        super(context, resource, objects);
-        this.context=context;
-        this.produit=objects;
+    private List<Produit> mProduitsList;
+
+    public ProduitAdapter(List<Produit> produitList) {
+        mProduitsList = produitList;
+    }
+
+    @NonNull
+    @Override
+    public ProduitHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_produit, parent, false);
+        return new ProduitHolder(view);
     }
 
     @Override
-    public View getView(final int pos, View convertView, ViewGroup parent){
-        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.activity_produit,parent,false);
+    public void onBindViewHolder(@NonNull ProduitHolder holder, int position) {
+        holder.bind(mProduitsList.get(position));
+    }
 
-
-        TextView nom=(TextView) rowView.findViewById(R.id.nomP);
-
-        nom.setText(""+produit.get(pos).getNom());
-
-        Log.v("list", "onResponse: "+produit);
-
-
-
-
-        return rowView;
-
-
-
+    @Override
+    public int getItemCount() {
+        return mProduitsList.size();
     }
 }

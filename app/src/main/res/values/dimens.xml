@@ -37,5 +37,5 @@
     <dimen name="dimen_40dp">40dp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
     <dimen name="morning_label_text_size">24sp</dimen>
-    <dimen name="toolbar_title_text_size">24sp</dimen>
+    <dimen name="toolbar_title_text_size">18sp</dimen>
 </resources>

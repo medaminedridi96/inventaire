@@ -1,4 +1,4 @@
-package com.dridimedamine.inventaire;
+package com.dridimedamine.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,20 +8,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dridimedamine.data.rest.ApiClient;
 import com.dridimedamine.entites.Depot;
 import com.dridimedamine.entites.Produit;
 import com.dridimedamine.global.Constants;
 import com.dridimedamine.global.Utils;
-import com.dridimedamine.remote.DepotService;
-import com.dridimedamine.ui.activities.BaseActivity;
+import com.dridimedamine.inventaire.ProduitActivity;
+import com.dridimedamine.inventaire.R;
 import com.dridimedamine.ui.view.CustomSpinner;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +47,9 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
 
 
     private void initializeView() {
+
+        toolbarTitle.setVisibility(View.VISIBLE);
+
         usernameTextView = findViewById(R.id.tv_username);
         depositSpinner = findViewById(R.id.spinner_deposit);
         depositSpinner.setOnItemSelectedListener(this);
@@ -95,8 +95,6 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         } else {
             showErrorDialog(getString(R.string.check_network));
         }
-
-
     }
 
     private void simulate() {

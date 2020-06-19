@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -20,10 +22,11 @@ public class BaseActivity extends AppCompatActivity {
     private PreferenceManager mPreferenceManager;
 
     public Toolbar mToolbar;
+    public TextView toolbarTitle;
+    public ImageButton backArrowButton;
 
     private ProgressDialog mProgressDialog;
     private SimpleDialog mSimpleDialog;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -40,6 +43,11 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initializeToolBar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (mToolbar != null) {
+            toolbarTitle = mToolbar.findViewById(R.id.tv_toolbar_title);
+            backArrowButton = mToolbar.findViewById(R.id.iv_arrow_back);
+        }
     }
 
     public void showProgressBar() {

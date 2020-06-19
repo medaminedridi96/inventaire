@@ -37,7 +37,7 @@
         <activity
             android:name=".ComptageActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name="com.dridimedamine.ui.activities.HomeActivity">
 
         </activity>
         <activity android:name=".MainActivity"></activity>

@@ -35,6 +35,9 @@
     <string name="check_network">Une connexion internet est nécessaire pour utiliser l\'application</string>
     <string name="error_username_or_password">"Veuillez entrer les coordonnées nécessaires ! "</string>
     <string name="home_choose_hanger_title">Choisir un dépôt</string>
+    <string name="theorical_stock">Stock théorique</string>
+    <string name="real_stock">Stock réel</string>
+    <string name="code_label">"Code produit : "</string>
 
 
 </resources>

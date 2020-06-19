@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.dridimedamine.data.rest.ApiClient;
 import com.dridimedamine.global.Constants;
 import com.dridimedamine.global.Utils;
-import com.dridimedamine.inventaire.HomeActivity;
 import com.dridimedamine.inventaire.R;
 import com.dridimedamine.manager.PreferenceManager;
 
@@ -85,6 +84,7 @@ public class LoginActivity extends BaseActivity {
         usernameEditText = findViewById(R.id.et_pseudo);
         passwordEditText = findViewById(R.id.et_password);
     }
+
 
     private void requestLoginProcess() {
         /**
