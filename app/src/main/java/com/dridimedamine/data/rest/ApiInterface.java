@@ -22,6 +22,6 @@ public interface ApiInterface {
     Call<List<Depot>> getDepot();
 
     @FormUrlEncoded
-    @POST(Constants.EndPoint.LOGIN_USER)
-    Call<JsonElement> loginUser(String username, String password); // TODO not implemented yet
+    @POST("agent")
+    Call<JsonElement> object(String username, String password); // TODO not implemented yet
 }

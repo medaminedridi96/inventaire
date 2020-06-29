@@ -16,13 +16,17 @@ public class Produit implements Serializable {
     @SerializedName("quantite")
     private int quantite;
 
+    @SerializedName("code")
+    private String code;
+
     public Produit() {
     }
 
-    public Produit(int id, String nom, int quantite) {
+    public Produit(int id, String nom, int quantite, String code) {
         this.id = id;
         this.nom = nom;
         this.quantite = quantite;
+        this.code= code;
     }
 
     public int getId() {
@@ -49,12 +53,19 @@ public class Produit implements Serializable {
         this.quantite = quantite;
     }
 
+    public String getCode() { return  code; }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Produit{" +
                 "id=" + id +
                 ", nom=" + nom +
                 ", quantite=" + quantite +
+                "code=" + code+
                 '}';
     }
 }

@@ -41,7 +41,7 @@ public class ApiClient {
     }
 
     private static String getBaseUrl() {
-        return "http://45aa462a4a64.ngrok.io/api/";
+        return "http://b73bca09204f.ngrok.io/api/";
     }
 
 }

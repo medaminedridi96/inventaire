@@ -35,11 +35,11 @@ public class ProduitHolder extends RecyclerView.ViewHolder {
 
     public void bind(Produit produit) {
         int simulateTheoricalValue = 23; //TODO check these values
-        theoricValueTextView.setText(String.format("%s\n%s", simulateTheoricalValue, itemView.getContext().getString(R.string.theorical_stock)));
+        realValueTextView.setText(String.format("%s\n%s", simulateTheoricalValue, itemView.getContext().getString(R.string.theorical_stock)));
 
-        realValueTextView.setText(String.format("%s\n%s", produit.getQuantite(), itemView.getContext().getString(R.string.real_stock)));
+        theoricValueTextView.setText(String.format("%s\n%s", produit.getQuantite(), itemView.getContext().getString(R.string.real_stock)));
 
         productNameTextView.setText(produit.getNom());
-        productCodeTextView.setText(String.format("%s %s", itemView.getContext().getString(R.string.code_label), String.valueOf(121129182)));
+        productCodeTextView.setText(String.format("%s %s", itemView.getContext().getString(R.string.code_label),produit.getCode()));
     }
 }

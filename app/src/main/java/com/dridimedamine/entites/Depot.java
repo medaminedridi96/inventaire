@@ -18,18 +18,18 @@ public class Depot implements Serializable {
     private String action;
 
     @SerializedName("produits")
-    List<Produit> products = new ArrayList<Produit>();
+    List<Produit> produit = new ArrayList<Produit>();
 
 
     public Depot() {
 
     }
 
-    public Depot(int id, String address, String action, List<Produit> products) {
+    public Depot(int id, String address, String action, List<Produit> produit) {
         this.id = id;
         this.address = address;
         this.action = action;
-        this.products = products;
+        this.produit = produit;
     }
 
     public Integer getId() {
@@ -56,12 +56,12 @@ public class Depot implements Serializable {
         this.action = action;
     }
 
-    public List<Produit> getProducts() {
-        return products;
+    public List<Produit> getProduit() {
+        return produit;
     }
 
-    public void setProducts(List<Produit> products) {
-        this.products = products;
+    public void setProduit(List<Produit> produit) {
+        this.produit = produit;
     }
 
     @Override

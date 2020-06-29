@@ -1,8 +1,13 @@
 package com.dridimedamine.inventaire;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +25,7 @@ public class ProduitActivity extends BaseActivity {
     private RecyclerView productsRecyclerView;
     private List<Produit> produitList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,29 @@ public class ProduitActivity extends BaseActivity {
 
         initializeView();
         initialize();
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.item_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.search_item:
+                Toast.makeText(this, "item search selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.qr_item:
+                Toast.makeText(this, "item QrCode selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private void initializeView() {
@@ -49,29 +78,26 @@ public class ProduitActivity extends BaseActivity {
             Depot selectedDepot = (Depot) getIntent().getSerializableExtra(Constants.IntentKeys.SELECTED_DEPOT);
             if (selectedDepot != null) {
                 produitList = new ArrayList<>();
-                produitList.addAll(selectedDepot.getProducts());
-                //populateProductsList(produitList);
-                simulate(); //TODO remove
+                produitList.addAll(selectedDepot.getProduit());
+                populateProductsList(produitList);
+
+                //simulate(); //TODO remove
             }
         }
 
     }
 
+
+
+
     private void populateProductsList(List<Produit> produitList) {
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecyclerView.setLayoutManager(linearLayoutManager);
         productsRecyclerView.setAdapter(new ProduitAdapter(produitList));
+
+
     }
 
-    private void simulate() {
-        List<Produit> produits = new ArrayList<>();
-        produits.add(new Produit(1, "product 1", 99));
-        produits.add(new Produit(2, "product 2", 12));
-        produits.add(new Produit(3, "product 3", 121));
-        produits.add(new Produit(4, "product 4", 0));
-        produits.add(new Produit(5, "product 5", 50));
-        produits.add(new Produit(6, "product 6", 612));
 
-        populateProductsList(produits);
-    }
 }

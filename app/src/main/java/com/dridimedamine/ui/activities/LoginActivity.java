@@ -38,10 +38,10 @@ public class LoginActivity extends BaseActivity {
         initializeView();
         initialize();
 
-        simulate(); //TODO to remove
+        //simulate(); //TODO to remove
     }
 
-    private void simulate() {
+   /* private void simulate() {
         if (usernameEditText.getText().toString().isEmpty() && passwordEditText.getText().toString().isEmpty()) {
             connectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity {
                 }
             });
         }
-    }
+    }*/
 
     private void initialize() {
         mSharedPreferences = PreferenceManager.getInstance();
@@ -98,7 +98,7 @@ public class LoginActivity extends BaseActivity {
 
             if (isValidForm(username, password)) {
                 showProgressBar();
-                Call call = ApiClient.getClient().loginUser(username, password);
+                Call call = ApiClient.getClient().getAgents();
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) {

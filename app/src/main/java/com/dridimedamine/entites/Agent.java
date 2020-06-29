@@ -1,6 +1,5 @@
 package com.dridimedamine.entites;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Agent {
@@ -8,35 +7,40 @@ public class Agent {
 
 
     @SerializedName("id")
-    @Expose
+
     private Integer id;
 
     @SerializedName("nom")
-    @Expose
+
     private String nom;
 
     @SerializedName("prenom")
-    @Expose
+
     private String prenom;
 
     @SerializedName("adresse")
-    @Expose
+
     private String adresse;
 
     @SerializedName("tel")
-    @Expose
+
     private Integer tel;
+
+    @SerializedName("password")
+
+    private String password;
 
 
     public Agent() {
     }
 
-    public Agent(Integer id, String nom, String prenom, String adresse, Integer tel) {
+    public Agent(Integer id, String nom, String prenom, String adresse, Integer tel, String password) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.tel = tel;
+        this.password = password;
     }
 
 
@@ -80,6 +84,13 @@ public class Agent {
         this.tel = tel;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public String toString() {
@@ -89,6 +100,7 @@ public class Agent {
                 ", prenom='" + prenom + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", tel=" + tel +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

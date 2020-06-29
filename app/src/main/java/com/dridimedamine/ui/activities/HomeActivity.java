@@ -46,6 +46,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
     }
 
 
+
     private void initializeView() {
 
         toolbarTitle.setVisibility(View.VISIBLE);
@@ -90,44 +91,13 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         }
 
         if (Utils.isNetworkAvailable(this)) {
-            //getDepotList();
-            simulate(); // TODO remove simulation
+            getDepotList();
+             // TODO remove simulation
         } else {
             showErrorDialog(getString(R.string.check_network));
         }
     }
 
-    private void simulate() {
-        List<Produit> produits1 = new ArrayList<>();
-        produits1.add(new Produit(1, "product 1", 99));
-        produits1.add(new Produit(2, "product 2", 12));
-        produits1.add(new Produit(3, "product 3", 121));
-
-        List<Produit> produits2 = new ArrayList<>();
-        produits2.add(new Produit(4, "product 4", 0));
-        produits2.add(new Produit(5, "product 5", 50));
-        produits2.add(new Produit(6, "product 6", 612));
-
-        List<Produit> produits3 = new ArrayList<>();
-        produits3.add(new Produit(7, "product 7", 190));
-        produits3.add(new Produit(8, "product 8", 1211));
-        produits3.add(new Produit(9, "product 9", 871));
-
-
-        List<Depot> depots = new ArrayList<>();
-        depots.add(new Depot(1, "address 1", "action 1", produits1));
-        depots.add(new Depot(2, "address 2", "action 2", produits2));
-        depots.add(new Depot(3, "address 3", "action 3", produits3));
-
-        showProgressBar();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                populateDepositSpinner(depots);
-            }
-        }, 1500);
-
-    }
 
     private void populateDepositSpinner(List<Depot> depots) {
         hideProgressBar();
