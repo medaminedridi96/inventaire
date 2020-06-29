@@ -12,7 +12,7 @@ public class Constants {
     }
 
     public static class HttpResponses {
-        public static final int CREATED = 201;
+        public static final int USER_OK = 201;
         public static final int CODE_OK = 200;
         public static final int NOT_FOUND = 404;
     }

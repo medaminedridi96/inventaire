@@ -1,16 +1,13 @@
 package com.dridimedamine.adapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dridimedamine.listener.OnItemClicked;
 import com.dridimedamine.entites.Depot;
 import com.dridimedamine.entites.Produit;
 import com.dridimedamine.inventaire.R;
@@ -20,9 +17,11 @@ import java.util.List;
 public class ProduitAdapter extends RecyclerView.Adapter<ProduitHolder> {
 
     private List<Produit> mProduitsList;
+    private OnItemClicked onItemClicked;
 
-    public ProduitAdapter(List<Produit> produitList) {
+    public ProduitAdapter(List<Produit> produitList, OnItemClicked onItemClicked) {
         mProduitsList = produitList;
+        this.onItemClicked = onItemClicked;
     }
 
     @NonNull
@@ -34,7 +33,7 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ProduitHolder holder, int position) {
-        holder.bind(mProduitsList.get(position));
+        holder.bind(mProduitsList.get(position), this.onItemClicked);
     }
 
     @Override

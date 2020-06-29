@@ -26,4 +26,7 @@ public interface ApiInterface {
 
     @POST("agent")
     Call<Agent> login(@Body AgentPost agentPost);
+
+    //@POST("produit")
+    //Call<Produit> postValue(@Body ProductPost productPost)
 }

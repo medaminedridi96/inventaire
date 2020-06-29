@@ -3,12 +3,14 @@ package com.dridimedamine.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dridimedamine.data.rest.ApiClient;
 import com.dridimedamine.entites.Agent;
@@ -17,6 +19,7 @@ import com.dridimedamine.global.Constants;
 import com.dridimedamine.global.Utils;
 import com.dridimedamine.inventaire.R;
 import com.dridimedamine.manager.PreferenceManager;
+import com.dridimedamine.ui.view.RequestDialog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +43,9 @@ public class LoginActivity extends BaseActivity {
 
         initializeView();
         initialize();
+
+
+
 
         //simulate(); //TODO to remove
     }
@@ -107,7 +113,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) {
                         switch (response.code()) {
-                            case Constants.HttpResponses.CREATED:
+                            case Constants.HttpResponses.USER_OK:
                                 if (response.body() != null) {
                                     Agent agentResponse = (Agent) response.body();
                                     hideProgressBar();

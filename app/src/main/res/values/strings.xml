@@ -38,6 +38,7 @@
     <string name="theorical_stock">Stock théorique</string>
     <string name="real_stock">Stock réel</string>
     <string name="code_label">"Code produit : "</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
