@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dridimedamine.data.rest.ApiClient;
+import com.dridimedamine.entites.Agent;
+import com.dridimedamine.entites.AgentPost;
 import com.dridimedamine.global.Constants;
 import com.dridimedamine.global.Utils;
 import com.dridimedamine.inventaire.R;
@@ -96,18 +99,21 @@ public class LoginActivity extends BaseActivity {
             String username = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
+            AgentPost agentPost = new AgentPost(username, "", "", 0, password);
             if (isValidForm(username, password)) {
                 showProgressBar();
-                Call call = ApiClient.getClient().getAgents();
+                Call call = ApiClient.getClient().login(agentPost);
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) {
                         switch (response.code()) {
-                            case Constants.HttpResponses.CODE_OK:
+                            case Constants.HttpResponses.CREATED:
                                 if (response.body() != null) {
+                                    Agent agentResponse = (Agent) response.body();
                                     hideProgressBar();
-                                    mSharedPreferences.put(Constants.SharedPreferencesKeys.USERNAME, username);
-                                    handleSuccess(response.body());
+                                    mSharedPreferences.put(Constants.SharedPreferencesKeys.NAME, agentPost.getNom());
+                                    mSharedPreferences.put(Constants.SharedPreferencesKeys.PASSWORD, agentPost.getPassword());
+                                    handleSuccess(agentResponse);
                                 } else {
                                     handleError();
                                 }
@@ -139,11 +145,8 @@ public class LoginActivity extends BaseActivity {
         showErrorDialog(getString(R.string.error_server));
     }
 
-    private void handleSuccess(Object body) {
-        //TODO body is the response resulting from calling login api
-
+    private void handleSuccess(Agent agent) {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        intent.putExtra(Constants.IntentKeys.USERNAME, "simulated value user");
         startActivity(intent);
         finish();
     }

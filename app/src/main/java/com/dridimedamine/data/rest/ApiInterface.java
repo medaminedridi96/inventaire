@@ -1,17 +1,20 @@
 package com.dridimedamine.data.rest;
 
 import com.dridimedamine.entites.Agent;
+import com.dridimedamine.entites.AgentPost;
 import com.dridimedamine.entites.Depot;
-import com.dridimedamine.global.Constants;
 import com.google.gson.JsonElement;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -21,7 +24,6 @@ public interface ApiInterface {
     @GET("depot")
     Call<List<Depot>> getDepot();
 
-    @FormUrlEncoded
     @POST("agent")
-    Call<JsonElement> object(String username, String password); // TODO not implemented yet
+    Call<Agent> login(@Body AgentPost agentPost);
 }

@@ -5,29 +5,22 @@ import com.google.gson.annotations.SerializedName;
 public class Agent {
 
 
-
     @SerializedName("id")
-
     private Integer id;
 
     @SerializedName("nom")
-
     private String nom;
 
     @SerializedName("prenom")
-
     private String prenom;
 
     @SerializedName("adresse")
-
     private String adresse;
 
     @SerializedName("tel")
-
-    private Integer tel;
+    private int tel;
 
     @SerializedName("password")
-
     private String password;
 
 
@@ -94,13 +87,6 @@ public class Agent {
 
     @Override
     public String toString() {
-        return "Agent{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", tel=" + tel +
-                ", password='" + password + '\'' +
-                '}';
+        return nom;
     }
 }

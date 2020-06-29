@@ -2,7 +2,7 @@ package com.dridimedamine.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,15 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dridimedamine.data.rest.ApiClient;
-import com.dridimedamine.entites.Depot;
-import com.dridimedamine.entites.Produit;
-import com.dridimedamine.global.Constants;
-import com.dridimedamine.global.Utils;
-import com.dridimedamine.inventaire.ProduitActivity;
 import com.dridimedamine.inventaire.R;
-import com.dridimedamine.ui.view.CustomSpinner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +22,8 @@ import retrofit2.Response;
 public class HomeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String EXTRA_TEXT = "com.dridimedamine.inventaire.EXTRA_TEXT";
+
+    private PreferenceManager mSharedPreferences;
 
     private TextView usernameTextView;
     private CustomSpinner depositSpinner;
@@ -44,7 +39,6 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         initialize();
 
     }
-
 
 
     private void initializeView() {
@@ -84,15 +78,13 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
 
     private void initialize() {
 
-        // TODO get data from login page
-        if (getIntent().hasExtra(Constants.IntentKeys.USERNAME) && getIntent().getStringExtra(Constants.IntentKeys.USERNAME) != null) {
-            String username = getIntent().getStringExtra(Constants.IntentKeys.USERNAME);
-            usernameTextView.setText(username);
-        }
+        mSharedPreferences = com.dridimedamine.manager.PreferenceManager.getInstance();
+
+        usernameTextView.setText(mSharedPreferences.getString(Constants.SharedPreferencesKeys.NAME));
 
         if (Utils.isNetworkAvailable(this)) {
             getDepotList();
-             // TODO remove simulation
+            // TODO remove simulation
         } else {
             showErrorDialog(getString(R.string.check_network));
         }

@@ -12,6 +12,7 @@ public class Constants {
     }
 
     public static class HttpResponses {
+        public static final int CREATED = 201;
         public static final int CODE_OK = 200;
         public static final int NOT_FOUND = 404;
     }
@@ -22,7 +23,7 @@ public class Constants {
     }
 
     public static class SharedPreferencesKeys {
-        public static final String USERNAME = "username";
+        public static final String NAME = "nom";
         public static final String PASSWORD = "password";
     }
 

@@ -34,4 +34,8 @@ public class PreferenceManager {
         editor.putBoolean(key, value);
         editor.apply();
     }
+
+    public void getString(String key) {
+        mSharedPreferences.getString(key, "");
+    }
 }

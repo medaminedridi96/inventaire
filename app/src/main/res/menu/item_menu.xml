@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/search_item"
+    <item
+        android:id="@+id/search_item"
         android:icon="@drawable/search"
         android:title="Cherche"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always" />
 
-    <item android:id="@+id/qr_item"
+    <item
+        android:id="@+id/qr_item"
         android:icon="@drawable/qrcode"
         android:title="QR Code"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always" />
 
 </menu>
